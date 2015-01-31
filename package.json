@@ -1,0 +1,26 @@
+{
+  "name"        : "tmpfs",
+  "version"     : "0.0.1",
+  "description" : "A temp file manager",
+  "repository"  : { "type": "git", "url": "https://github.com/intellinote/tmpfs.git" },
+  "bugs"        : { "url": "https://github.com/intellinote/tmpfs/issues" },
+  "license"     : "MIT",
+  "author"      : "Intellinote <https://www.intellinote.net/>",
+  "dependencies": {
+    "temp"                  : "~0.8",
+    "mkdirp"                : "latest",
+    "remove"                : "latest"
+  },
+  "devDependencies": {
+    "coffee-coverage"       : "latest",
+    "coffee-script"         : "latest",
+    "docco"                 : "latest",
+    "highlight.js"          : "latest",
+    "marked"                : "latest",
+    "marked-toc"            : "latest",
+    "mocha"                 : "latest",
+    "should"                : "latest"
+  },
+  "main":"lib/tmpfs.js",
+  "engines": { "node": ">=0.10"  }
+}
