@@ -1,9 +1,9 @@
-path            = require 'path'
-fs              = require 'fs'
-os              = require 'os'
-temp            = require 'temp'
-mkdirp          = require 'mkdirp'
-remove          = require 'remove'
+path   = require 'path'
+fs     = require 'fs'
+os     = require 'os'
+temp   = require 'temp'
+mkdirp = require 'mkdirp'
+remove = require 'remove'
 
 class Tmpfs
 
@@ -31,12 +31,12 @@ class Tmpfs
   _on_exit:(callback)=>
     process.on 'cleanup', ()->
       callback()
-    process.on 'exit',()->
+    process.on 'exit', ()->
       process.emit 'cleanup'
-    process.on 'SIGINT' ,()->
+    process.on 'SIGINT', ()->
       process.exit 2
     process.on 'uncaughtException', (e)->
-      console.log "uncaughtException",e,e.stack
+      console.log "uncaughtException", e, e.stack
       process.exit 99
 
 exports.tmpfs = exports.Tmpfs = Tmpfs
