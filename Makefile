@@ -217,22 +217,22 @@ $(COFFEE_JS_OBJ): $(NODE_MODULES) $(COFFEE_SRCS) $(COFFEE_TEST_SRCS)
 ################################################################################
 # TEST TARGETS
 
-# test: $(MOCHA_TESTS) $(NODE_MODULES)
-# 	$(MOCHA_EXE) $(MOCHA_TEST_ARGS) ${MOCHA_EXTRA_ARGS} $(MOCHA_TESTS)
+test: $(MOCHA_TESTS) $(NODE_MODULES)
+	$(MOCHA_EXE) $(MOCHA_TEST_ARGS) ${MOCHA_EXTRA_ARGS} $(MOCHA_TESTS)
 
-# test-watch: $(MOCHA_TESTS) $(NODE_MODULES)
-# 	$(MOCHA_EXE) --watch $(MOCHA_TEST_ARGS) ${MOCHA_EXTRA_ARGS} $(MOCHA_TESTS)
+test-watch: $(MOCHA_TESTS) $(NODE_MODULES)
+	$(MOCHA_EXE) --watch $(MOCHA_TEST_ARGS) ${MOCHA_EXTRA_ARGS} $(MOCHA_TESTS)
 
-# coverage: $(COFFEE_SRCS) $(COFFEE_TEST_SRCS) $(MOCHA_TESTS) $(NODE_MODULES)
-# 	rm -rf $(COVERAGE_TMP_DIR)
-# 	rm -rf $(LIB_COV)
-# 	mkdir -p $(COVERAGE_TMP_DIR)
-# 	cp -r $(LIB)/* $(COVERAGE_TMP_DIR)/.
-# 	$(COVERAGE_EXE) $(COVERAGE_ARGS) $(COVERAGE_TMP_DIR) $(LIB_COV)
-# 	mkdir -p `dirname $(COVERAGE_REPORT)`
-# 	$(MOCHA_EXE) $(MOCHA_COV_ARGS) $(MOCHA_TESTS) > $(COVERAGE_REPORT)
-# 	rm -rf $(COVERAGE_TMP_DIR)
-# 	rm -rf $(LIB_COV)
+coverage: $(COFFEE_SRCS) $(COFFEE_TEST_SRCS) $(MOCHA_TESTS) $(NODE_MODULES)
+	rm -rf $(COVERAGE_TMP_DIR)
+	rm -rf $(LIB_COV)
+	mkdir -p $(COVERAGE_TMP_DIR)
+	cp -r $(LIB)/* $(COVERAGE_TMP_DIR)/.
+	$(COVERAGE_EXE) $(COVERAGE_ARGS) $(COVERAGE_TMP_DIR) $(LIB_COV)
+	mkdir -p `dirname $(COVERAGE_REPORT)`
+	$(MOCHA_EXE) $(MOCHA_COV_ARGS) $(MOCHA_TESTS) > $(COVERAGE_REPORT)
+	rm -rf $(COVERAGE_TMP_DIR)
+	rm -rf $(LIB_COV)
 
 ################################################################################
 # MARKDOWN & OTHER DOC TARGETS
