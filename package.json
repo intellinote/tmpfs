@@ -1,6 +1,6 @@
 {
   "name"        : "tmpfs",
-  "version"     : "0.0.2",
+  "version"     : "0.0.3",
   "description" : "A temp file manager",
   "repository"  : { "type": "git", "url": "https://github.com/intellinote/tmpfs.git" },
   "bugs"        : { "url": "https://github.com/intellinote/tmpfs/issues" },
@@ -8,8 +8,8 @@
   "author"      : "Intellinote <https://www.intellinote.net/>",
   "dependencies": {
     "temp"                  : "~0.8",
-    "mkdirp"                : "latest",
-    "remove"                : "latest"
+    "mkdirp"                : "~0.5",
+    "remove"                : "~0.1"
   },
   "devDependencies": {
     "coffee-coverage"       : "latest",
