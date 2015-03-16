@@ -9,9 +9,9 @@ class Tmpfs
 
   # OPTIONS:
   #  - `dir` - the parent directory that will contain temp files and sub-directories (optional, defaults to a dir below `os.tmpDir()`).
-  #  - `app_name` - used in the name of the containing directory (unless `dir` is specified); (optional, defaults to `tmpfs`.
+  #  - `app_name` - used in the name of the containing directory (unless `dir` is specified); (optional, defaults to `tmpfs`).
   #  - `mkdir` - unless `false`, immediately make the directory to hold temp files
-  #  - `cleanup_on_exit` - unless `false`, automatically remove the coontain `dir` on exit
+  #  - `cleanup_on_exit` - unless `false`, automatically remove the container `dir` on exit
   constructor:(options={})->
     app_name = options.app_name ? 'tmpfs'
     parent = options.parent ? os.tmpDir()
