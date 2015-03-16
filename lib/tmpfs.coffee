@@ -24,11 +24,13 @@ class Tmpfs
   # Generate a unique file *name* within the parent directory.
   make_temp_filename:(options={})=>
     options.dir ?= @dir
+    @_mkdir options.dir
     return temp.path(options)
 
-  # Create a temporary directory within th e parent directory.
+  # Create a temporary directory within the parent directory.
   make_temp_dir:(options={})=>
     options.dir ?= @dir
+    @_mkdir options.dir
     return temp.mkdirSync(options)
 
   # Remove the parent directory and all contained files right now.
@@ -71,7 +73,7 @@ class Tmpfs
     options.dir ?= @dir
     filename = @make_temp_filename()
     stream = fs.createWriteStream(filename)
-    callback(err,filename,stream)
+    callback(null,filename,stream)
 
   # Generate a random, probably unique filename, using the given prefix and suffix if specified.
   _random_name:(prefix,suffix)=>
