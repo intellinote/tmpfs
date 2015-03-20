@@ -24,13 +24,15 @@ class Tmpfs
   # Generate a unique file *name* within the parent directory.
   make_temp_filename:(options={})=>
     options.dir ?= @dir
-    @_mkdir options.dir
+    unless options.mkdir is false
+      @_mkdir options.dir
     return temp.path(options)
 
   # Create a temporary directory within the parent directory.
   make_temp_dir:(options={})=>
     options.dir ?= @dir
-    @_mkdir options.dir
+    unless options.mkdir is false
+      @_mkdir options.dir
     return temp.mkdirSync(options)
 
   # Remove the parent directory and all contained files right now.
@@ -49,6 +51,22 @@ class Tmpfs
     options.dir ?= @dir
     return temp.open options, (err, map)=>
       callback(err,map?.path,map?.fd)
+
+  # write the specified data (string or buffer) to a randomly generated tmp file
+  # callback:(err,filename)
+  write_temp_file:(data,options,callback)=>
+    if typeof options is 'function' and not callback?
+      callback = options
+      options = null
+    if typeof data is 'string'
+      data = new Buffer(data,'utf-8')
+    @open_temp_stream options, (err, filename, stream)=>
+      if err?
+        callback err
+      else
+        stream.write(data)
+        stream.end ()=>
+          callback null, filename
 
   # Create a new temporary file.
   # Callback signature: (err, filename)

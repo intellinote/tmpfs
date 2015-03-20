@@ -24,7 +24,7 @@ describe 'Tmpfs',->
     done()
 
   it "can cleanup immediately",(done)->
-    t = new Tmpfs(parent:@tmpfs.dir)
+    t = new Tmpfs(parent:@tmpfs.dir,cleanup_on_exit:false)
     t.create_temp_file (err,f1)=>
       should.not.exist err
       fs.existsSync(f1).should.be.ok
@@ -41,7 +41,7 @@ describe 'Tmpfs',->
           done()
 
   it "can create and clean up temp directories",(done)->
-    t = new Tmpfs(parent:@tmpfs.dir)
+    t = new Tmpfs(parent:@tmpfs.dir,cleanup_on_exit:false)
     dir1 = t.make_temp_dir()
     fs.existsSync(dir1).should.be.ok
     fs.statSync(dir1).isDirectory().should.be.ok
@@ -53,8 +53,17 @@ describe 'Tmpfs',->
     fs.existsSync(dir2).should.not.be.ok
     done()
 
+  it "can write to a temp file",(done)->
+    data = "The quick\nbrown fox\njumped over\nthe lazy dogs.\n"
+    t = new Tmpfs(parent:@tmpfs.dir,cleanup_on_exit:false)
+    t.write_temp_file data, (err,filename)=>
+      should.not.exist err
+      read = fs.readFileSync(filename).toString('utf-8')
+      data.should.equal read
+      done()
+
   it "can create filenames with given suffix or prefix",(done)->
-    t = new Tmpfs(parent:@tmpfs.dir)
+    t = new Tmpfs(parent:@tmpfs.dir,cleanup_on_exit:false)
     path.basename(t.make_temp_filename()).should.match /^.+$/
     path.basename(t.make_temp_filename(prefix:'foo-')).should.match /^foo-.+$/
     path.basename(t.make_temp_filename(suffix:'-bar')).should.match /^.+-bar$/
