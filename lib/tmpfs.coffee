@@ -60,13 +60,9 @@ class Tmpfs
       options = null
     if typeof data is 'string'
       data = new Buffer(data,'utf-8')
-    @open_temp_stream options, (err, filename, stream)=>
-      if err?
-        callback err
-      else
-        stream.write(data)
-        stream.end ()=>
-          callback null, filename
+    file = @make_temp_filename(options)
+    fs.writeFileSync(file,data)
+    callback(null,file)
 
   # Create a new temporary file.
   # Callback signature: (err, filename)
@@ -89,7 +85,7 @@ class Tmpfs
       callback = options
       options  = {}
     options.dir ?= @dir
-    filename = @make_temp_filename()
+    filename = @make_temp_filename(options)
     stream = fs.createWriteStream(filename)
     callback(null,filename,stream)
 
