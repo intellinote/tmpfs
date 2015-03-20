@@ -182,7 +182,6 @@ module: js
 	mkdir -p $(MODULE_DIR)
 	cp -r lib $(MODULE_DIR)
 	cp $(PACKAGE_JSON) $(MODULE_DIR)
-	cp Makefile $(MODULE_DIR)
 	cp LICENSE.txt $(MODULE_DIR)
 	mv module $(PACKAGE_DIR)
 	tar -czf $(PACKAGE_DIR).tgz $(PACKAGE_DIR)
