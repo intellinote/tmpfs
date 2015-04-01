@@ -22,11 +22,16 @@ class Tmpfs
       @_on_exit => @cleanup_now(false)
 
   # Generate a unique file *name* within the parent directory.
+  # options.dir - parent directory
+  # options.filename - base name of file to create
   make_temp_filename:(options={})=>
     options.dir ?= @dir
     unless options.mkdir is false
       @_mkdir options.dir
-    return temp.path(options)
+    f = temp.path(options)
+    if options.filename?
+      f = path.join(f,options.filename)
+    return f
 
   # Create a temporary directory within the parent directory.
   make_temp_dir:(options={})=>
