@@ -30,6 +30,7 @@ class Tmpfs
       @_mkdir options.dir
     f = temp.path(options)
     if options.filename?
+      @_mkdir f
       f = path.join(f,options.filename)
     return f
 
